@@ -2,18 +2,33 @@
 Spectral Decomposition via Reference Data
 参照データを用いたスペクトル分解ツール
 
-## データの準備
+## Requirements
 
-### 解析対象のデータ
+* **OS**: Ubuntu 22.04 LTS
+* **Language**: Python >= 3.9
+
+## Installation
+```{this repo}/```ディレクトリに移動後：
+```bash
+uv venv
+source .venv/bin/activate
+uv sync
+```
+インストールによる不具合について責任は負いかねます。
+
+## Usage
+### データの準備
+
+#### 解析対象のデータ
 ```{this repo}/data/*.csv```に解析対象のCSVファイルを置く．  
 複数ファイルに対応可能（{this repo}/data/*.csvのファイルはすべて読み込まれる）．  
 一つ一つのcsvファイルは2カラムデータ形式となっている必要あり．
 
-### 参照データ
+#### 参照データ
 ```{this repo}/data/reference.csv```に参照データCSVシートを置く．  
 ↑```reference.csv```という名前は必須．
 
-### 設定ファイル
+#### 設定ファイル
 ```{this repo}/data/config.json```に解析設定のJSONファイルを置く．  
 ↑```config.json```という名前は必須．
 テンプレートを以下に示す：
@@ -41,25 +56,21 @@ Spectral Decomposition via Reference Data
 }
 ```
 
-
-## Dockerコンテナの作成
-```{this repo}/container/```ディレクトリに移動後：
-```
-docker build -t ref-spe-image .
-```
-
-```{this repo}/```ディレクトリに移動後：
-```
-docker run -it --rm -v `pwd`:/app ref-spe-image bash
-```
-解析プログラムの実行
-```
+### 解析プログラムの実行
+```bash
 python src/main.py
 ```
 
 ## 出力結果
 ```{this repo}/out/```に解析結果が吐き出される．
 
-### 設計概要
+## 設計概要
 
-![設計](/img/アーキテクチャ設計.png)
+![設計](/img/architecture_design.png)
+
+## References
+[1] R. Murakami, H. Tanaka, H. Shinotsuka, K. Nagata, H. Shouno, H. Yoshikawa, "Development of multiple core-level XPS spectra decomposition method based on the Bayesian information criterion", Journal of Electron Spectroscopy and Related Phenomena. 245 (2020) 147003. https://doi.org/10.1016/j.elspec.2020.147003.
+
+## Author
+* **Ryo Murakami, Hiroshi Shinotsuka**
+* NIMS

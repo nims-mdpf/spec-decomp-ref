@@ -1,0 +1,17 @@
+[project]
+name = "spec-decomp-ref"
+version = "0.1.0"
+description = "Spectral Decomposition via Reference Data"
+readme = "README.md"
+requires-python = ">=3.9"
+
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "matplotlib>=3.6",
+    "python-pptx>=0.6",
+]
+
+[tool.uv]
+system-certs = true
