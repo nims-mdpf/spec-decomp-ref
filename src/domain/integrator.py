@@ -1,14 +1,22 @@
-import numpy as np
 from typing import List
 
+import numpy as np
+
+
 class InputController:
-    """ 複数のデータにおける共有パラメータの制御を行うクラス．
-        （責務）共有パラメータが明確になったパラメータ配列を
-        モデル関数に入力できるパラメータ配列に変換する．
+    """複数のデータにおける共有パラメータの制御を行うクラス．
+    （責務）共有パラメータが明確になったパラメータ配列を
+    モデル関数に入力できるパラメータ配列に変換する．
     """
+
     def __init__(
-        self, num_input_data: int, global_idx: List[int], local_idx: List[int], 
-        sg_param_size: int, bg_param_size: int) -> None:
+        self,
+        num_input_data: int,
+        global_idx: List[int],
+        local_idx: List[int],
+        sg_param_size: int,
+        bg_param_size: int,
+    ) -> None:
         """
         Args:
             num_input_data (int): 統合するデータ数
@@ -24,9 +32,9 @@ class InputController:
         self.bg_param_size = bg_param_size
 
         # リターンするパラメータ配列のサイズ
-        self.output_size = (sg_param_size + bg_param_size)  
-        
-    def __call__(self, input_array: np.ndarray, m: int, K: int)->np.ndarray:
+        self.output_size = sg_param_size + bg_param_size
+
+    def __call__(self, input_array: np.ndarray, m: int, K: int) -> np.ndarray:
         """
         Args:
             input_array (np.ndarray): 共通と非共通が明確に分けられたパラメータ配列
@@ -65,42 +73,49 @@ class InputController:
 
         # 出力用のパラメータ配列
         output_array = np.empty(self.output_size)
-        
+
         # 共通パラメータ配列
-        global_array = input_array[:(K*len(self.global_idx))]
+        global_array = input_array[: (K * len(self.global_idx))]
         # 非共通（個別）パラメータ配列
-        local_array = input_array[(K*len(self.global_idx)):]
-        
+        local_array = input_array[(K * len(self.global_idx)) :]
+
         # 共有パラメータを出力パラメータに配置
         for i, idx in enumerate(self.global_idx):
-            output_array[(1+idx*K):(1+(idx+1)*K)] = global_array[((i*K)):((i+1)*K)]
-        
+            output_array[(1 + idx * K) : (1 + (idx + 1) * K)] = global_array[
+                (i * K) : ((i + 1) * K)
+            ]
+
         # 強度hを先頭に配置
-        each_size = m*(self.sg_param_size + self.bg_param_size - K*len(self.global_idx))
+        each_size = m * (
+            self.sg_param_size + self.bg_param_size - K * len(self.global_idx)
+        )
         output_array[0] = local_array[each_size]
-            
+
         # 非共有（個別）パラメータを出力パラメータに配置
         for i, idx in enumerate(self.local_idx):
-            output_array[(1+idx*K):(1+(idx+1)*K)] = local_array[(each_size+1+(i*K)):(each_size+1+((i+1)*K))]
-        
+            output_array[(1 + idx * K) : (1 + (idx + 1) * K)] = local_array[
+                (each_size + 1 + (i * K)) : (each_size + 1 + ((i + 1) * K))
+            ]
+
         # バックグラウンドを出力パラメータに配置
-        bg_idx = (each_size+self.sg_param_size-K*len(self.global_idx))
-        output_array[self.sg_param_size:] = local_array[bg_idx:bg_idx+self.bg_param_size]
-        
+        bg_idx = each_size + self.sg_param_size - K * len(self.global_idx)
+        output_array[self.sg_param_size :] = local_array[
+            bg_idx : bg_idx + self.bg_param_size
+        ]
+
         return output_array
-
-
 
 
 class Integrator:
     """複数のデータを統合するクラス．
-        （責務）複数データにおけるフォワード計算と評価処理
+    （責務）複数データにおけるフォワード計算と評価処理
     """
+
     def __init__(self, models, input_controller: InputController, K: int) -> None:
         self.input_controller = input_controller
-        self.K = K # 状態数. ex) 化合物種
+        self.K = K  # 状態数. ex) 化合物種
         self.models = models
-    
+
     def forward(self, m: int, parameters: np.ndarray) -> np.ndarray:
         """フォワード計算
 
@@ -114,8 +129,7 @@ class Integrator:
         """
         parameters = self.input_controller(input_array=parameters, m=m, K=self.K)
         return self.models[m].forward(parameters)
-    
-    
+
     def evaluate(self, parameters: np.ndarray) -> float:
         """評価値の計算
 

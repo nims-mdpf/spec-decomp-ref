@@ -1,5 +1,5 @@
+import abc
 import os
-import sys
 import typing
 from dataclasses import dataclass
 
@@ -10,9 +10,6 @@ import numpy as np
 class InputData:
     x: np.ndarray
     y: np.ndarray
-
-
-import abc
 
 
 class InputBoundary(metaclass=abc.ABCMeta):

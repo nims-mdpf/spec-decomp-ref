@@ -1,6 +1,8 @@
 # 型チェック用のデコレータ
-import inspect
 import functools
+import inspect
+
+
 def args_type_check(func):
     @functools.wraps(func)
     def args_type_check_wrapper(*args, **kwargs):
@@ -12,4 +14,5 @@ def args_type_check(func):
                 error_msg = '引数"{}"の型が対応していません．（対応している型：{}，指定された型：{}）'
                 raise TypeError(error_msg.format(arg_key, request_type, type(arg_val)))
         return func(*args, **kwargs)
+
     return args_type_check_wrapper

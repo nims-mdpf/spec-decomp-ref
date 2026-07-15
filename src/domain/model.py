@@ -1,5 +1,4 @@
-import os
-import sys
+import abc
 import typing
 
 import numpy as np
@@ -10,7 +9,7 @@ import domain.adjustment
 EPS = 1e-6  # ゼロ割の対策
 
 
-### モデルクラス
+# モデルクラス
 # ----------------------------------------------------------------------------------------
 class Model:
     def __init__(
@@ -106,9 +105,6 @@ class Model:
         return output_param
 
 
-import abc
-
-
 class Signal(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def forward(self, x: np.ndarray, parameters: np.ndarray) -> np.ndarray:
@@ -119,7 +115,7 @@ class Signal(metaclass=abc.ABCMeta):
         raise NotImplementedError()
 
 
-### ピーク関数のクラス
+# ピーク関数のクラス
 # ----------------------------------------------------------------------------------------
 class Peaks(Signal):
     PEAK_PARAM_SIZE: int = 4  # [c, mu, s, g]
@@ -342,7 +338,7 @@ class ZeroPositionPeakBackground:
 
     def forward(self, x: np.ndarray, parameters: np.ndarray, **kwargs) -> np.ndarray:
         self.array2parameters(parameters)
-        bg = h * np.exp(-(x**2) / (2 * s**2))
+        bg = self.h * np.exp(-(x**2) / (2 * self.s**2))
         return bg
 
 

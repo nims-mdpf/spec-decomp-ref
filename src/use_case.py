@@ -1,8 +1,8 @@
 import json
-import os
-import sys
 import typing
 from glob import glob
+
+import numpy as np
 
 import domain.access
 import domain.algorithm
@@ -10,8 +10,6 @@ import domain.controller
 import domain.integrator
 import domain.model
 import domain.utility
-import numpy as np
-import pandas as pd
 import shared.controller
 import shared.presenter
 import shared.utility
@@ -55,8 +53,8 @@ class Featurizer(shared.controller.InputBoundary):
         try:
             return globals()[input_type](**kwargs)
         except KeyError as e:
-            print(f"キーが見つかりません:{input_type}")
-            sys.exit(0)
+            print(f"Key not found: {input_type}")
+            raise ValueError(f"Invalid model type: {input_type}") from e
 
     @shared.utility.args_type_check
     def featurize(
