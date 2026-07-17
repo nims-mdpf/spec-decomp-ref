@@ -2,6 +2,9 @@
 Spectral Decomposition via Reference Data
 参照データを用いたスペクトル分解ツール
 
+<img src="img/sampledata_out/fitting_Cu2p3.png" height=300 alt="sample_result_Cu2p3">
+<img src="img/sampledata_out/fitting_CuLMM.png" height=300 alt="sample_result_CuLMM">
+
 ## Requirements
 
 * **OS**: Ubuntu 22.04 LTS
@@ -35,23 +38,23 @@ uv sync
 ```
 {
     "model": {
-        "peak" : "VoigtPeaks",
-        "background" : "LinearBackground",
-        "noise" : "GaussianNoise",
-        "regularization" : "BayesianInformationCriterion"
+        "peak": "VoigtPeaks",
+        "background": "ShirleyBackground",
+        "noise": "PoissonNoise",
+        "regularization": "BayesianInformationCriterion"
     },
-    "states" : ["CaO", "CaCO3"],
+    "states": ["Cu-metal", "Cu2O", "CuO", "Cu(OH)2"],
     "is_common": {
-        "ratio" : true,
-        "shift" : false,
-        "sigma" : false,
-        "gamma" : true
+        "ratio": true,
+        "shift": true,
+        "sigma": false,
+        "gamma": false
     },
-    "bounds" : {
-        "ratio" : [0, 1],
-        "shift" : [-0.5, 0.5],
-        "sigma" : [0.3, 0.8],
-        "gamma" : [0.1, 0.4]
+    "bounds": {
+        "ratio": [-1, 1],
+        "shift": [-1.0, 0.5],
+        "sigma": [0.9, 1.5],
+        "gamma": [0.9, 1.5]
     }
 }
 ```

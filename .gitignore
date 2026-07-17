@@ -21,7 +21,7 @@
 *.csv
 *.png
 
-!img/*
+!img/**
 # サンプルデータ
-!data/*
-!db/*
+!data/**
+!db/**
