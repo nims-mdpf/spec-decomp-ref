@@ -1,0 +1,38 @@
+{
+    "model": {
+        "peak": "VoigtPeaks",
+        "background": "ShirleyBackground",
+        "noise": "PoissonNoise",
+        "regularization": "BayesianInformationCriterion"
+    },
+    "states": [
+        "Cu-metal",
+        "Cu2O",
+        "CuO",
+        "Cu(OH)2"
+    ],
+    "is_common": {
+        "ratio": true,
+        "shift": true,
+        "sigma": false,
+        "gamma": false
+    },
+    "bounds": {
+        "ratio": [
+            -1,
+            1
+        ],
+        "shift": [
+            -1.0,
+            0.5
+        ],
+        "sigma": [
+            0.9,
+            1.5
+        ],
+        "gamma": [
+            0.9,
+            1.5
+        ]
+    }
+}

@@ -1,0 +1,27 @@
+# すべてをignore
+*
+
+# すべてのディレクトリをホワイトリストに追加する
+!*/
+
+!.gitignore
+!pyproject.toml
+!uv.lock
+!README.md
+
+# ソースコード
+!src/*
+!src/domain/*
+!src/shared/*
+
+# コンテナー
+!container/*
+
+*.pyc
+*.csv
+*.png
+
+!img/**
+# サンプルデータ
+!data/**
+!db/**
