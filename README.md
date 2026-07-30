@@ -65,6 +65,8 @@ python src/main.py
 ## 出力結果
 `{this repo}/out/`に解析結果が出力される。
 
+## その他
+入出力ファイルの詳細についてはdocsフォルダの資料を参照。
 
 ## References
 [1] R. Murakami, H. Tanaka, H. Shinotsuka, K. Nagata, H. Shouno, H. Yoshikawa, "Development of multiple core-level XPS spectra decomposition method based on the Bayesian information criterion", Journal of Electron Spectroscopy and Related Phenomena. 245 (2020) 147003. https://doi.org/10.1016/j.elspec.2020.147003.
