@@ -69,8 +69,8 @@ python src/main.py
 入出力ファイルの詳細についてはdocsフォルダの資料を参照。
 
 ## References
-[1] R. Murakami, H. Tanaka, H. Shinotsuka, K. Nagata, H. Shouno, H. Yoshikawa, "Development of multiple core-level XPS spectra decomposition method based on the Bayesian information criterion", Journal of Electron Spectroscopy and Related Phenomena. 245 (2020) 147003. https://doi.org/10.1016/j.elspec.2020.147003.
-[2] R. Murakami, H. Yoshikawa, K. Nagata, H. Shinotsuka, H. Tanaka, T. Iizuka, H. Shouno, Automatic estimation of unknown chemical components in a mixed material by XPS analysis using a genetic algorithm, Science and Technology of Advanced Materials: Methods. 2 (2022) 91–105. https://doi.org/10.1080/27660400.2022.2061878.
+1. R. Murakami, H. Tanaka, H. Shinotsuka, K. Nagata, H. Shouno, H. Yoshikawa, "Development of multiple core-level XPS spectra decomposition method based on the Bayesian information criterion", Journal of Electron Spectroscopy and Related Phenomena. 245 (2020) 147003. https://doi.org/10.1016/j.elspec.2020.147003.
+2. R. Murakami, H. Yoshikawa, K. Nagata, H. Shinotsuka, H. Tanaka, T. Iizuka, H. Shouno, Automatic estimation of unknown chemical components in a mixed material by XPS analysis using a genetic algorithm, Science and Technology of Advanced Materials: Methods. 2 (2022) 91–105. https://doi.org/10.1080/27660400.2022.2061878.
 
 ## Author
 * **Ryo Murakami, Hiroshi Shinotsuka**
